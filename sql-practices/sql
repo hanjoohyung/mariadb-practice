@@ -1,0 +1,31 @@
+-- Basic Query
+
+-- table 삭제
+drop table pet;
+
+-- table 생성
+create table pet(
+   name varchar(20),
+   owner varchar(20),
+   species varchar(20),
+   gender char(1),
+   birth DATE,
+   death DATE
+);
+
+-- scheme 확인
+desc pet;
+
+-- 조회
+select name, owner, species, gender, birth, death from pet;
+
+-- 데이터 생성, create
+insert 
+		into pet
+		value ('성이', '한형', 'dog', 'm', '1997-10-13', null);
+       
+-- 데이터 삭제, delete
+delete 
+		from pet
+		where name = '박원균'
+		
