@@ -34,7 +34,7 @@ select dept_no as '사번', emp_no as '부서 번호'
     where dept_no = 'd005' or 'd009'; -- where dept_no in ('d005','d009');와 동일
 									  -- select 'd005'로 서브쿼리를 생성해주면 where dept_no in (select 'd005')로도 출력이 가능
                                       
--- where 절 #4 : LIKE 검색
+-- where 절 #4 : LIKE 검색 
 -- 예제 : 1989년에 입사한 직원의 이름, 입사일을 출력
 select concat(first_name, ' ', last_name) as 이름, hire_date as 입사일
 	from employees
@@ -46,6 +46,16 @@ select concat(first_name, ' ', last_name) as 이름, hire_date as 입사일
     
 select concat(first_name, ' ', last_name) as 이름, hire_date as 입사일
 	from employees
-	where hire_date between '1989-01-01' and '1989-12-31'
+	where hire_date between '1989-01-01' and '1989-12-31';
     
--- order by hire_date desc;면 최대값이 먼저 출력, asc면 최소값이 먼저 출력
+-- order by 절 #1 [순서는 언제나 맨 마지막에 사용]
+-- 예제 1 : 남자 직원의 전체 이름, 성별, 입사일을 입사순으로 출력하라
+select concat(first_name, ' ', last_name) as 이름, gender as 성별, hire_date as 입사일
+	from employees
+    where gender = 'm'
+    order by hire_date asc;
+    
+-- 예제 2 : 직원들의 사번, 월급을 사번 ,월급 순으로 출력하라
+select emp_no as 사번, salary as 월급, from_date as '월급 시작날', to_date as 현재
+	from salaries
+    order by emp_no asc, salary desc;
