@@ -71,7 +71,8 @@ select name, species
 -- 통계,집계 함수 
 select count(*)
 	from pet
-    where death is not null; 
+    where death is not null;
+    
     
 select count(death)
 	from pet;
