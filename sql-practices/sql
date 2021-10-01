@@ -1,31 +1,51 @@
--- Basic Query
+-- select 연습
+select * from departments;
+select dept_no, dept_name from departments;
 
--- table 삭제
-drop table pet;
+-- alias(as 생략가능)
+-- 예제 1 : employees 테이블에서 직원의 이름, 성별, 입사일을 출력해라 [as OOOO하면 칼럼의 이름을 OOOO으로 변경이된다]
+select first_name as '이름', gender as '성별', hire_date as '입사일'
+	from employees;
+    
+-- 예제 2 : employees 테이블에서 직원의 이름, 성별, 입사일을 출력 + concat 함수 [concat 함수는 지정된 것을 합쳐서 출력]
+select concat(first_name,' ',last_name) as '이름', gender as '성별', hire_date as '입사일'
+	from employees;
+    
+-- distinct [중복 없이 결과값을 출력한다]
+-- 예제 : title 테이블에서 모든 직급의 이름을 출력하라 [limit a,b 는 a부터 b개만큼 출력해라라는 명령어]
+select distinct(title) from titles;
 
--- table 생성
-create table pet(
-   name varchar(20),
-   owner varchar(20),
-   species varchar(20),
-   gender char(1),
-   birth DATE,
-   death DATE
-);
-
--- scheme 확인
-desc pet;
-
--- 조회
-select name, owner, species, gender, birth, death from pet;
-
--- 데이터 생성, create
-insert 
-		into pet
-		value ('성이', '한형', 'dog', 'm', '1997-10-13', null);
-       
--- 데이터 삭제, delete
-delete 
-		from pet
-		where name = '박원균'
-		
+-- where 절 #1
+-- 예제 : 1991년 이전에 입사한 직원의 이름, 성별, 입사일을 출력하라
+select concat(first_name,' ', last_name) as 이름, gender as 성별, hire_date as 입사일
+	from employees
+    where hire_date < '1991-01-01';
+    
+-- where 절 #2 : 논리 연산자
+-- 예제 : 1982년 이전에 입사한 여직원의 이름, 입사일을 출력하라
+select concat(first_name,' ', last_name) as 이름, gender as 성별, hire_date as 입사일
+	from employees
+    where hire_date < '1989-01-01' and gender = 'f';
+    
+-- where 절 #3 : in 연산자
+-- 예제 : dept_emp 테이블에서 부서 번호가 d005나 d009에 속한 사원의 사번, 부서 번호를 출력하라
+select dept_no as '사번', emp_no as '부서 번호'
+	from dept_emp
+    where dept_no = 'd005' or 'd009'; -- where dept_no in ('d005','d009');와 동일
+									  -- select 'd005'로 서브쿼리를 생성해주면 where dept_no in (select 'd005')로도 출력이 가능
+                                      
+-- where 절 #4 : LIKE 검색
+-- 예제 : 1989년에 입사한 직원의 이름, 입사일을 출력
+select concat(first_name, ' ', last_name) as 이름, hire_date as 입사일
+	from employees
+	where hire_date >= '1989-01-01' and hire_date <='1989-12-31';
+    
+select concat(first_name, ' ', last_name) as 이름, hire_date as 입사일
+	from employees
+	where hire_date like '1989%';
+    
+select concat(first_name, ' ', last_name) as 이름, hire_date as 입사일
+	from employees
+	where hire_date between '1989-01-01' and '1989-12-31'
+    
+-- order by hire_date desc;면 최대값이 먼저 출력, asc면 최소값이 먼저 출력
