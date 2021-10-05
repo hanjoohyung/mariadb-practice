@@ -20,13 +20,16 @@ order by 이름 asc;
 
 select d.emp_no as 사번, concat(e.first_name,' ',e.last_name) as 이름, d.dept_no as 부서
 	from employees e join dept_emp d on e.emp_no = d.emp_no
+    where d.to_date = '9999-01-01'
 order by 이름 asc;
 
 -- 문제4.
 -- 전체 사원의 사번, 이름, 연봉, 직책, 부서를 모두 이름 순서로 출력합니다.
 
-select d.emp_no as 사번, concat(e.first_name,' ',e.last_name) as 이름, t.title as 직책,  d.dept_no as 부서
+select d.emp_no as 사번, concat(e.first_name,' ',e.last_name) as 이름, t.title as 직책, s.salary as 연봉, d.dept_no as 부서
 	from employees e join titles t on e.emp_no = t.emp_no join dept_emp d on e.emp_no = d.emp_no
+					join salaries s on e.emp_no = s.emp_no
+    where d.to_date = '9999-01-01' and t.to_date = '9999-01-01' 
 order by 이름 asc;
 
 -- 문제5.
