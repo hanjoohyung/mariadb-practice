@@ -18,12 +18,16 @@ order by 이름 asc;
 -- 문제3.
 -- 전체 사원의 사번, 이름, 현재 부서를 이름 순서로 출력하세요..
 
-select t.emp_no as 사번, concat(e.first_name,' ',e.last_name) as 이름, t.title as 부서
-	from employees e join titles t on e.emp_no = t.emp_no
+select d.emp_no as 사번, concat(e.first_name,' ',e.last_name) as 이름, d.dept_no as 부서
+	from employees e join dept_emp d on e.emp_no = d.emp_no
 order by 이름 asc;
+
 -- 문제4.
 -- 전체 사원의 사번, 이름, 연봉, 직책, 부서를 모두 이름 순서로 출력합니다.
 
+select d.emp_no as 사번, concat(e.first_name,' ',e.last_name) as 이름, t.title as 직책,  d.dept_no as 부서
+	from employees e join titles t on e.emp_no = t.emp_no join dept_emp d on e.emp_no = d.emp_no
+order by 이름 asc;
 
 -- 문제5.
 -- ‘Technique Leader’의 직책으로 과거에 근무한 적이 있는 모든 사원의 사번과 이름을 출력하세요. (현재 ‘Technique Leader’의 직책(으로 근무하는 사원은 고려하지 않습니다.) 이름은 first_name과 last_name을 합쳐 출력 합니다.
