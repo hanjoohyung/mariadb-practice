@@ -51,6 +51,14 @@ order by 연봉 asc;
 -- 문제4.
 -- 현재, 사원들의 사번, 이름, 매니저 이름, 부서 이름으로 출력해 보세요.
 
+select d.emp_no as 사번, concat(e.first_name, ' ', e.last_name) as '매니저 이름', q.dept_name as 부서
+	from employees e join dept_emp d on e.emp_no = d.emp_no join departments q on d.dept_no = q.dept_no
+					join titles t on e.emp_no = t.emp_no
+                    where t.title = 'Manager' ;
+                    
+select concat(first_name, ' ', last_name) as 이름
+	from employees
+  
 -- 문제5.
 -- 현재, 평균연봉이 가장 높은 부서의 사원들의 사번, 이름, 직책, 연봉을 조회하고 연봉 순으로 출력하세요.
 

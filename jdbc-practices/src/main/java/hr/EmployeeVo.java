@@ -8,6 +8,7 @@ public class EmployeeVo {
 	private String gender;
 	private String hireDate;
 	private int salary;
+	
 	public Long getNo() {
 		return no;
 	}
